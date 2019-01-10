@@ -87,12 +87,12 @@ class App extends React.Component {
               <div className='row'>
                 <Switch>
                   <PrivateRoute path='/' exact component={Friends} authed={this.state.authed} />
-                  <PrivateRoute path='/friends' component={Friends} authed={this.state.authed} />
-                  <PrivateRoute path='/friends/:id/edit' authed={this.state.authed} component={EditFriend} />
+                  <PrivateRoute exact path='/friends' component={Friends} authed={this.state.authed} />
+                  <PrivateRoute path='/friends/:id/edit' component={EditFriend} authed={this.state.authed}/>
                   <PrivateRoute path='/newfriend' component={NewFriend} authed={this.state.authed} />
-                  <PrivateRoute path='/holidays' component={Holidays} authed={this.state.authed} />
+                  <PrivateRoute exact path='/holidays' component={Holidays} authed={this.state.authed} />
                   <PrivateRoute path='/newholiday' component={NewHoliday} authed={this.state.authed} />
-                  <PrivateRoute path='/holidays/:id' component={HolidayDetail} authed={this.state.authed} />
+                  <PrivateRoute exact path='/holidays/:id' component={HolidayDetail} authed={this.state.authed} />
                   <PrivateRoute path='/holidays/:id/edit' component={EditHoliday} authed={this.state.authed} />
                   <PrivateRoute path='/holidays/:id/friends' component={HolidayFriends} authed={this.state.authed} />
                   <PublicRoute path='/auth' component={Auth} authed={this.state.authed} />
