@@ -93,8 +93,8 @@ class App extends React.Component {
                   <PrivateRoute path='/holidays' component={Holidays} authed={this.state.authed} />
                   <PrivateRoute path='/newholiday' component={NewHoliday} authed={this.state.authed} />
                   <PrivateRoute path='/holidays/:id' component={HolidayDetail} authed={this.state.authed} />
-                  <PrivateRoute path='/editholiday' component={EditHoliday} authed={this.state.authed} />
-                  <PrivateRoute path='/holidayfriends' component={HolidayFriends} authed={this.state.authed} />
+                  <PrivateRoute path='/holidays/:id/edit' component={EditHoliday} authed={this.state.authed} />
+                  <PrivateRoute path='/holidays/:id/friends' component={HolidayFriends} authed={this.state.authed} />
                   <PublicRoute path='/auth' component={Auth} authed={this.state.authed} />
                 </Switch>
               </div>
