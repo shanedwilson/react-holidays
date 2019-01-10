@@ -13,6 +13,9 @@ import EditFriend from '../components/pages/EditFriend/EditFriend';
 import NewFriend from '../components/pages/NewFriend/NewFriend';
 import Holidays from '../components/pages/Holidays/Holidays';
 import NewHoliday from '../components/pages/NewHoliday/NewHoliday';
+import HolidayDetail from '../components/pages/HolidayDetail/HolidayDetail';
+import EditHoliday from '../components/pages/EditHoliday/EditHoliday';
+import HolidayFriends from '../components/pages/HolidayFriends/HolidayFriends';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 import authRequests from '../helpers/data/authRequests';
 import connection from '../helpers/data/connection';
@@ -85,14 +88,13 @@ class App extends React.Component {
                 <Switch>
                   <PrivateRoute path='/' exact component={Friends} authed={this.state.authed} />
                   <PrivateRoute path='/friends' component={Friends} authed={this.state.authed} />
-                    <PrivateRoute
-                      path='/friends/:id/edit'
-                      authed={this.state.authed}
-                      component={EditFriend}
-                    />
+                  <PrivateRoute path='/friends/:id/edit' authed={this.state.authed} component={EditFriend} />
                   <PrivateRoute path='/newfriend' component={NewFriend} authed={this.state.authed} />
                   <PrivateRoute path='/holidays' component={Holidays} authed={this.state.authed} />
                   <PrivateRoute path='/newholiday' component={NewHoliday} authed={this.state.authed} />
+                  <PrivateRoute path='/holidays/:id' component={HolidayDetail} authed={this.state.authed} />
+                  <PrivateRoute path='/editholiday' component={EditHoliday} authed={this.state.authed} />
+                  <PrivateRoute path='/holidayfriends' component={HolidayFriends} authed={this.state.authed} />
                   <PublicRoute path='/auth' component={Auth} authed={this.state.authed} />
                 </Switch>
               </div>

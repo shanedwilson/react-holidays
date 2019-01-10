@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'reactstrap';
+import EditFriends from '../EditFriend/EditFriend';
 import './Friends.scss';
 
 class Friends extends React.Component {
