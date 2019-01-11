@@ -1,7 +1,7 @@
 import axios from 'axios';
-import apiKeys from '../../../db/apiKeys.json';
+import apiKeys from '../apiKeys';
 
-const firebaseUrl = apiKeys.firebaseKeys.databaseURL;
+const firebaseUrl = apiKeys.firebaseConfig.databaseURL;
 
 const getAllFriends = uid => new Promise((resolve, reject) => {
   axios.get(`${firebaseUrl}/friends.json?orderBy="uid"&equalTo="${uid}"`)
