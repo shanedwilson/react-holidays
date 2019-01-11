@@ -20,6 +20,7 @@ import MyNavbar from '../components/MyNavbar/MyNavbar';
 import authRequests from '../helpers/data/authRequests';
 import connection from '../helpers/data/connection';
 import friendsData from '../helpers/data/friendsData';
+import holidaysData from '../helpers/data/holidaysData';
 
 import './App.scss';
 
@@ -42,6 +43,7 @@ class App extends React.Component {
       authed: false,
       pendingUser: true,
       friends: [],
+      holidays: [],
     }
 
     componentDidMount() {
@@ -51,8 +53,19 @@ class App extends React.Component {
         const uid = authRequests.getCurrentUid();
         friendsData.getAllFriends(uid)
           .then((friends) => {
-            console.log(friends);
             this.setState({ friends });
+          })
+          .catch((err) => {
+            console.error('error with friends GET', err);
+          });
+      };
+
+      const getHolidays = () => {
+        const uid = authRequests.getCurrentUid();
+        holidaysData.getAllHolidays(uid)
+          .then((holidays) => {
+            console.log(holidays);
+            this.setState({ holidays });
           })
           .catch((err) => {
             console.error('error with friends GET', err);
@@ -66,6 +79,7 @@ class App extends React.Component {
             pendingUser: false,
           });
           getFriends();
+          getHolidays();
         } else {
           this.setState({
             authed: false,
