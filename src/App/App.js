@@ -64,7 +64,6 @@ class App extends React.Component {
         const uid = authRequests.getCurrentUid();
         holidaysData.getAllHolidays(uid)
           .then((holidays) => {
-            console.log(holidays);
             this.setState({ holidays });
           })
           .catch((err) => {
