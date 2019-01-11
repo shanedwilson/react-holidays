@@ -1,0 +1,47 @@
+{
+  "friend1" : {
+  "name": "Callan M.",
+  "address": "1 Main Street, Nashville, TN 37209",
+  "phoneNumber": "1112223333",
+  "email": "callan@yomamma.com",
+  "relationship": "sister from anotha mother",
+  "isAvoiding": true,
+  "uid": "ZVXJzORopudCeS1FLm4wf5E5qyG2"
+  },
+  "friend2" : {
+  "name": "Stacye W.",
+  "address": "2923 Glenmeade Dr, Nashville, TN 37216",
+  "phoneNumber": "6155934728",
+  "email": "stacye@thistlefarms.org",
+  "relationship": "beloved",
+  "isAvoiding": false,
+  "uid": "ZVXJzORopudCeS1FLm4wf5E5qyG2"
+  },
+  "friend3" : {
+  "name": "Nazz W.",
+  "address": "2923 Glenmeade Dr, Nashville, TN 37216",
+  "phoneNumber": "6154175174",
+  "email": "nazz@gmail.com",
+  "relationship": "son",
+  "isAvoiding": false,
+  "uid": "ZVXJzORopudCeS1FLm4wf5E5qyG2"
+  },
+  "friend4" : {
+  "name": "Jamie V.",
+  "address": "2468 Peachtree Dr, Atlanta, GA 30316",
+  "phoneNumber": "6154175174",
+  "email": "alanar5ster@gmail.com",
+  "relationship": "friend",
+  "isAvoiding": false,
+  "uid": "ZVXJzORopudCeS1FLm4wf5E5qyG2"
+  },
+  "friend5" : {
+  "name": "Dale W.",
+  "address": "425 SW 16th, Richmond, IN 47374",
+  "phoneNumber": "7652382793",
+  "email": "mr_wilson5@frontier.com",
+  "relationship": "father",
+  "isAvoiding": false,
+  "uid": 1238
+  }        
+}

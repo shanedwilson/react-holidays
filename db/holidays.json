@@ -1,0 +1,26 @@
+{
+  "holiday1" : {
+    "name": "Thanksgiving",
+    "Date": "11/22/18",
+    "imageUrl": "http://www.todayifoundout.com/wp-content/uploads/2017/11/thanksgiving-turkey-640x427.png",
+    "location": "NSS",
+    "startTime": "11am",
+    "uid" : "ZVXJzORopudCeS1FLm4wf5E5qyG2"
+  },
+  "holiday2" : {
+    "name": "Festivus",
+    "Date": "12/23/18",
+    "imageUrl": "https://s3.amazonaws.com/media.thecrimson.com/photos/2016/12/25/002926_1319611.jpg",
+    "location": "Your Mom's House",
+    "startTime": "2pm",
+    "uid" : "ZVXJzORopudCeS1FLm4wf5E5qyG2"
+  },
+  "holiday3" : {
+    "name": "National Bourbon Day",
+    "Date": "6/14/19",
+    "imageUrl": "https://n7jmr7muhj-flywheel.netdna-ssl.com/wp-content/uploads/2014/06/National-Bourbon-Day-June-14-1024x512.jpg",
+    "location": "Woodford Reserve Distillery",
+    "startTime": "12pm",
+    "uid" : "1238"
+  }    
+}
