@@ -7,7 +7,7 @@ import './Friends.scss';
 class Friends extends React.Component {
   static propTypes = {
     friends: PropTypes.arrayOf(friendShape.friendShape),
-    deleteSingFriend: PropTypes.func,
+    deleteSingleFriend: PropTypes.func,
     passFriendToEdit: PropTypes.func,
     onFriendSelection: PropTypes.func,
   }
