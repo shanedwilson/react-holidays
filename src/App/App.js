@@ -115,12 +115,24 @@ class App extends React.Component {
             <div className="container">
               <div className='row'>
                 <Switch>
-                  <PrivateRoute path='/' exact component={Friends} authed={this.state.authed} />
-                  <PrivateRoute exact path='/friends' component={Friends} authed={this.state.authed} />
+                  <PrivateRoute
+                  path='/' exact
+                  component={() => <Friends friends={this.state.friends} />}
+                  authed={this.state.authed}
+                  />
+                  <PrivateRoute
+                  exact path='/friends'
+                  component={() => <Friends friends={this.state.friends} />}
+                  authed={this.state.authed}
+                  />
                   <PrivateRoute path='/friends/:id/edit' component={EditFriend} authed={this.state.authed}/>
-                  <PrivateRoute path='/newfriend' component={NewFriend} authed={this.state.authed} />
-                  <PrivateRoute exact path='/holidays' component={Holidays} authed={this.state.authed} />
-                  <PrivateRoute path='/newholiday' component={NewHoliday} authed={this.state.authed} />
+                  <PrivateRoute exact path='/friends/new' component={NewFriend} authed={this.state.authed} />
+                  <PrivateRoute
+                  exact path='/holidays'
+                  component={() => <Holidays holidays={this.state.holidays} />}
+                  authed={this.state.authed}
+                  />
+                  <PrivateRoute path='/holidays/new' component={NewHoliday} authed={this.state.authed} />
                   <PrivateRoute exact path='/holidays/:id' component={HolidayDetail} authed={this.state.authed} />
                   <PrivateRoute path='/holidays/:id/edit' component={EditHoliday} authed={this.state.authed} />
                   <PrivateRoute path='/holidays/:id/friends' component={HolidayFriends} authed={this.state.authed} />
