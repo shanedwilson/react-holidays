@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import holidayShape from '../../helpers/propz/holidayShape';
+// import holidayShape from '../../helpers/propz/holidayShape';
 import authRequests from '../../helpers/data/authRequests';
 
 import './HolidayCard.scss';
@@ -38,12 +38,12 @@ class FriendCard extends React.Component {
       if (holiday.uid === uid) {
         return (
         <div>
-          <span className="col">
+          <span className="col-1">
             <button className="btn btn-default" onClick={this.editEvent}>
               <i className="fas fa-pencil-alt"></i>
             </button>
           </span>
-          <span className="col">
+          <span className="col-1">
             <button className="btn btn-default" onClick={this.deleteEvent}>
               <i className="fas fa-trash-alt"></i>
             </button>
@@ -54,7 +54,7 @@ class FriendCard extends React.Component {
       return <span className="col-2"></span>;
     };
     return (
-      <div className="card col-3 mt-3 mr-1">
+      <div className="card col-5 mt-3 mr-1">
         <h5 className="card-header">{holiday.name}</h5>
         <div className="card-body">
           <img className="card-img-top" src={holiday.imageUrl} alt={holiday.name} />
