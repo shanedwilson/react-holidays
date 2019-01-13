@@ -19,8 +19,7 @@ import HolidayFriends from '../components/pages/HolidayFriends/HolidayFriends';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 import authRequests from '../helpers/data/authRequests';
 import connection from '../helpers/data/connection';
-import friendsData from '../helpers/data/friendsData';
-import holidaysData from '../helpers/data/holidaysData';
+// import holidaysData from '../helpers/data/holidaysData';
 
 import './App.scss';
 
@@ -42,34 +41,22 @@ class App extends React.Component {
     state = {
       authed: false,
       pendingUser: true,
-      friends: [],
       holidays: [],
     }
 
     componentDidMount() {
       connection();
 
-      const getFriends = () => {
-        const uid = authRequests.getCurrentUid();
-        friendsData.getAllFriends(uid)
-          .then((friends) => {
-            this.setState({ friends });
-          })
-          .catch((err) => {
-            console.error('error with friends GET', err);
-          });
-      };
-
-      const getHolidays = () => {
-        const uid = authRequests.getCurrentUid();
-        holidaysData.getAllHolidays(uid)
-          .then((holidays) => {
-            this.setState({ holidays });
-          })
-          .catch((err) => {
-            console.error('error with friends GET', err);
-          });
-      };
+      // const getHolidays = () => {
+      //   const uid = authRequests.getCurrentUid();
+      //   holidaysData.getAllHolidays(uid)
+      //     .then((holidays) => {
+      //       this.setState({ holidays });
+      //     })
+      //     .catch((err) => {
+      //       console.error('error with friends GET', err);
+      //     });
+      // };
 
       this.removeListener = firebase.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -77,8 +64,6 @@ class App extends React.Component {
             authed: true,
             pendingUser: false,
           });
-          getFriends();
-          getHolidays();
         } else {
           this.setState({
             authed: false,
@@ -115,23 +100,11 @@ class App extends React.Component {
             <div className="container">
               <div className='row'>
                 <Switch>
-                  <PrivateRoute
-                  path='/' exact
-                  component={() => <Friends friends={this.state.friends} />}
-                  authed={this.state.authed}
-                  />
-                  <PrivateRoute
-                  exact path='/friends'
-                  component={() => <Friends friends={this.state.friends} />}
-                  authed={this.state.authed}
-                  />
+                  <PrivateRoute path='/' exact component={Friends} authed={this.state.authed} />
+                  <PrivateRoute exact path='/friends' component={Friends} authed={this.state.authed} />
                   <PrivateRoute path='/friends/:id/edit' component={EditFriend} authed={this.state.authed}/>
                   <PrivateRoute exact path='/friends/new' component={NewFriend} authed={this.state.authed} />
-                  <PrivateRoute
-                  exact path='/holidays'
-                  component={() => <Holidays holidays={this.state.holidays} />}
-                  authed={this.state.authed}
-                  />
+                  <PrivateRoute exact path='/holidays' component={Holidays} authed={this.state.authed} />
                   <PrivateRoute path='/holidays/new' component={NewHoliday} authed={this.state.authed} />
                   <PrivateRoute exact path='/holidays/:id' component={HolidayDetail} authed={this.state.authed} />
                   <PrivateRoute path='/holidays/:id/edit' component={EditHoliday} authed={this.state.authed} />

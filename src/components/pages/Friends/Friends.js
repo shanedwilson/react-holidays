@@ -1,15 +1,27 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import friendShape from '../../../helpers/propz/friendShape';
+import friendsData from '../../../helpers/data/friendsData';
+import authRequests from '../../../helpers/data/authRequests';
 import FriendCard from '../../FriendCard/FriendCard';
 import './Friends.scss';
 
 class Friends extends React.Component {
-  static propTypes = {
-    friends: PropTypes.arrayOf(friendShape.friendShape),
-    deleteSingleFriend: PropTypes.func,
-    passFriendToEdit: PropTypes.func,
-    onFriendSelection: PropTypes.func,
+  state = {
+    friends: [],
+  }
+
+  getFriends = () => {
+    const uid = authRequests.getCurrentUid();
+    friendsData.getAllFriends(uid)
+      .then((friends) => {
+        this.setState({ friends });
+      })
+      .catch((err) => {
+        console.error('error with friends GET', err);
+      });
+  };
+
+  componentDidMount() {
+    this.getFriends();
   }
 
   changeView = (e) => {
@@ -19,13 +31,12 @@ class Friends extends React.Component {
 
   render() {
     const {
-      friends,
       deleteSingleFriend,
       passFriendToEdit,
       onFriendSelection,
     } = this.props;
 
-    const friendsCards = friends.map(friend => (
+    const friendsCards = this.state.friends.map(friend => (
     <FriendCard
     key={friend.id}
     friend={friend}
