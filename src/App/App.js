@@ -101,7 +101,8 @@ class App extends React.Component {
               </div>
             </div>
           </React.Fragment>
-        </BrowserRouter>      </div>
+        </BrowserRouter>
+      </div>
       );
     }
 }

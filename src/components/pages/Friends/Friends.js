@@ -36,6 +36,10 @@ class Friends extends React.Component {
     this.props.history.push(`/friends/${friendId}/edit`);
   }
 
+  newFriendView = () => {
+    this.props.history.push('/friends/new');
+  }
+
   render() {
     const {
       passFriendToEdit,
@@ -51,9 +55,13 @@ class Friends extends React.Component {
     passFriendToEdit={passFriendToEdit}
     />
     ));
+
     return (
       <div className="friends mx-auto">
         <h2>Friends</h2>
+        <button className="btn btn-success" onClick={this.newFriendView}>
+          <i className="fas fa-plus">  Add A Friend</i>
+        </button>
         <div className="row justify-content-center">{friendsCards}</div>
       </div>
     );
