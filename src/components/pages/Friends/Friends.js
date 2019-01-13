@@ -61,7 +61,7 @@ class Friends extends React.Component {
       <div className="friends mx-auto">
         <h2>Friends</h2>
         <div className="row justify-content-center">{friendsCards}</div>
-        <NewFriend addFriend={this.addFriend} />
+        <NewFriend onSubmit={this.addFriend} />
       </div>
     );
   }

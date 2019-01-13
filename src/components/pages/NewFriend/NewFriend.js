@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import authRequests from '../../../helpers/data/authRequests';
+
 import './NewFriend.scss';
 
 const defaultFriend = {
@@ -15,7 +16,7 @@ const defaultFriend = {
 
 class NewFriend extends React.Component {
   static propTypes = {
-    addFriend: PropTypes.func,
+    onSubmit: PropTypes.func,
   }
 
   state = {
@@ -47,10 +48,11 @@ class NewFriend extends React.Component {
 
   formSubmit = (e) => {
     e.preventDefault();
+    const { onSubmit } = this.props;
     const myFriend = { ...this.state.newFriend };
     myFriend.uid = authRequests.getCurrentUid();
     myFriend.isAvoiding = this.state.checkValue;
-    this.props.addFriend(myFriend);
+    onSubmit(myFriend);
     this.setState({ newFriend: defaultFriend });
   }
 
