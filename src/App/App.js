@@ -19,7 +19,6 @@ import HolidayFriends from '../components/pages/HolidayFriends/HolidayFriends';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 import authRequests from '../helpers/data/authRequests';
 import connection from '../helpers/data/connection';
-// import holidaysData from '../helpers/data/holidaysData';
 
 import './App.scss';
 
@@ -41,22 +40,10 @@ class App extends React.Component {
     state = {
       authed: false,
       pendingUser: true,
-      holidays: [],
     }
 
     componentDidMount() {
       connection();
-
-      // const getHolidays = () => {
-      //   const uid = authRequests.getCurrentUid();
-      //   holidaysData.getAllHolidays(uid)
-      //     .then((holidays) => {
-      //       this.setState({ holidays });
-      //     })
-      //     .catch((err) => {
-      //       console.error('error with friends GET', err);
-      //     });
-      // };
 
       this.removeListener = firebase.auth().onAuthStateChanged((user) => {
         if (user) {

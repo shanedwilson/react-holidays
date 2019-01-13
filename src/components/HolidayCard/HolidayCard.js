@@ -7,7 +7,7 @@ import './HolidayCard.scss';
 
 class FriendCard extends React.Component {
     static propTypes = {
-      holiday: holidayShape.holidayShape,
+      // holiday: holidayShape.holidayShape,
       deleteSingleHoliday: PropTypes.func,
       passHolidayToEdit: PropTypes.func,
     }
@@ -57,7 +57,7 @@ class FriendCard extends React.Component {
       <div className="card col-3 mt-3 mr-1">
         <h5 className="card-header">{holiday.name}</h5>
         <div className="card-body">
-          <img class="card-img-top" src={holiday.imageUrl} alt={holiday.name} />
+          <img className="card-img-top" src={holiday.imageUrl} alt={holiday.name} />
           <p className="card-text">{holiday.Date}</p>
           <p className="card-text">{holiday.location}</p>
           <p className="card-text">{holiday.startTime}</p>
