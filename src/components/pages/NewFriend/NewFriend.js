@@ -42,21 +42,9 @@ class NewFriend extends React.Component {
     this.setState({ checkValue: isDone });
   }
 
-  getFriends = () => {
-    const uid = authRequests.getCurrentUid();
-    friendsData.getAllFriends(uid)
-      .then((friends) => {
-        this.setState({ friends });
-      })
-      .catch((err) => {
-        console.error('error with friends GET', err);
-      });
-  };
-
   addFriend = (newFriend) => {
     friendsData.createFriend(newFriend)
       .then(() => {
-        this.getFriends();
         this.props.history.push('/friends');
       });
   }
