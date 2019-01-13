@@ -22,6 +22,9 @@ const getAllHolidays = uid => new Promise((resolve, reject) => {
     });
 });
 
+const deleteHoliday = holidayId => axios.delete(`${firebaseUrl}/holidays/${holidayId}.json`);
+
+
 // const getHolidaysByArrayOfIds = (uid, holidayIdsArray) => new Promise((resolve, reject) => {
 //   axios.get(`${baseUrl}/holidays.json?orderBy="uid"&equalTo="${uid}"`)
 //     .then((result) => {
@@ -41,4 +44,4 @@ const getAllHolidays = uid => new Promise((resolve, reject) => {
 //     });
 // });
 
-export default { getAllHolidays };
+export default { getAllHolidays, deleteHoliday };
