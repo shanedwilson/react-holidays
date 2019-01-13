@@ -1,16 +1,29 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import holidayShape from '../../../helpers/propz/holidayShape';
+import holidaysData from '../../../helpers/data/holidaysData';
+import authRequests from '../../../helpers/data/authRequests';
 import HolidayCard from '../../HolidayCard/HolidayCard';
 import './Holidays.scss';
 
 class Holidays extends React.Component {
-    static propTypes = {
-      holidays: PropTypes.arrayOf(holidayShape.holidayShape),
-      deleteSingleHoliday: PropTypes.func,
-      passHolidayToEdit: PropTypes.func,
-      onHolidaySelection: PropTypes.func,
-    }
+  state = {
+    holidays: [],
+  }
+
+  getHolidays = () => {
+    const uid = authRequests.getCurrentUid();
+    holidaysData.getAllHolidays(uid)
+      .then((holidays) => {
+        this.setState({ holidays });
+      })
+      .catch((err) => {
+        console.error('error with friends GET', err);
+      });
+  };
+
+  componentDidMount() {
+    this.getHolidays();
+  }
+
 
   holidayDetailsView = (e) => {
     const holidayId = e.target.id;
@@ -19,13 +32,12 @@ class Holidays extends React.Component {
 
   render() {
     const {
-      holidays,
       deleteSingleHoliday,
       passHolidayToEdit,
       onHolidaySelection,
     } = this.props;
 
-    const holidaysCards = holidays.map(holiday => (
+    const holidaysCards = this.state.holidays.map(holiday => (
     <HolidayCard
     key={holiday.id}
     holiday={holiday}
