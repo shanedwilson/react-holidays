@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import friendsData from '../../../helpers/data/friendsData';
 import authRequests from '../../../helpers/data/authRequests';
 
 import './NewFriend.scss';
@@ -15,10 +15,6 @@ const defaultFriend = {
 };
 
 class NewFriend extends React.Component {
-  static propTypes = {
-    onSubmit: PropTypes.func,
-  }
-
   state = {
     newFriend: defaultFriend,
     checkValue: false,
@@ -46,15 +42,36 @@ class NewFriend extends React.Component {
     this.setState({ checkValue: isDone });
   }
 
+  getFriends = () => {
+    const uid = authRequests.getCurrentUid();
+    friendsData.getAllFriends(uid)
+      .then((friends) => {
+        this.setState({ friends });
+      })
+      .catch((err) => {
+        console.error('error with friends GET', err);
+      });
+  };
+
+  addFriend = (newFriend) => {
+    friendsData.createFriend(newFriend)
+      .then(() => {
+        this.getFriends();
+        this.props.history.push('/friends');
+      });
+  }
+
   formSubmit = (e) => {
     e.preventDefault();
-    const { onSubmit } = this.props;
     const myFriend = { ...this.state.newFriend };
     myFriend.uid = authRequests.getCurrentUid();
     myFriend.isAvoiding = this.state.checkValue;
-    onSubmit(myFriend);
+    this.addFriend(myFriend);
     this.setState({ newFriend: defaultFriend });
   }
+
+  // changeView = (e) => {
+  // }
 
   render() {
     const { newFriend } = this.state;
