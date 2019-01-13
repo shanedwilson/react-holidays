@@ -15,7 +15,7 @@ const defaultFriend = {
 
 class NewFriend extends React.Component {
   static propTypes = {
-    onsubmit: PropTypes.func,
+    addFriend: PropTypes.func,
   }
 
   state = {
@@ -47,11 +47,10 @@ class NewFriend extends React.Component {
 
   formSubmit = (e) => {
     e.preventDefault();
-    const { onSubmit } = this.props;
     const myFriend = { ...this.state.newFriend };
     myFriend.uid = authRequests.getCurrentUid();
     myFriend.isAvoiding = this.state.checkValue;
-    onSubmit(myFriend);
+    this.props.addFriend(myFriend);
     this.setState({ newFriend: defaultFriend });
   }
 
@@ -136,7 +135,7 @@ class NewFriend extends React.Component {
               <input type="checkbox" className="custom-control-input" id="customCheck1" />
               <label className="custom-control-label" htmlFor="customCheck1">Am I avoiding this person?</label>
             </div>
-            <button type="button" className="btn btn-success mt-3" onSubmit={this.formSubmit}>
+            <button type="button" className="btn btn-success mt-3" onClick={this.formSubmit}>
               <i className="fas fa-plus"></i>
             </button>
           </form>

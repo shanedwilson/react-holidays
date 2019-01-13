@@ -2,6 +2,7 @@ import React from 'react';
 import friendsData from '../../../helpers/data/friendsData';
 import authRequests from '../../../helpers/data/authRequests';
 import FriendCard from '../../FriendCard/FriendCard';
+import NewFriend from '../NewFriend/NewFriend';
 import './Friends.scss';
 
 class Friends extends React.Component {
@@ -29,6 +30,13 @@ class Friends extends React.Component {
     this.getFriends();
   }
 
+  addFriend = (newFriend) => {
+    friendsData.createFriend(newFriend)
+      .then(() => {
+        this.getFriends();
+      });
+  }
+
   changeView = (e) => {
     const friendId = e.target.id;
     this.props.history.push(`/friends/${friendId}/edit`);
@@ -53,6 +61,7 @@ class Friends extends React.Component {
       <div className="friends mx-auto">
         <h2>Friends</h2>
         <div className="row justify-content-center">{friendsCards}</div>
+        <NewFriend addFriend={this.addFriend} />
       </div>
     );
   }
