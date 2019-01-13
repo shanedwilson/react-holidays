@@ -26,8 +26,10 @@ class Friends extends React.Component {
   }
 
   deleteSingleFriend = (friendId) => {
-    friendsData.deleteFriend(friendId);
-    this.getFriends();
+    friendsData.deleteFriend(friendId)
+      .then(() => {
+        this.getFriends();
+      });
   }
 
   addFriend = (newFriend) => {

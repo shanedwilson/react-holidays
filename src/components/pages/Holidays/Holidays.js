@@ -24,6 +24,13 @@ class Holidays extends React.Component {
     this.getHolidays();
   }
 
+  deleteSingleHoliday = (holidayId) => {
+    holidaysData.deleteHoliday(holidayId)
+      .then(() => {
+        this.getHolidays();
+      });
+  }
+
 
   holidayDetailsView = (e) => {
     const holidayId = e.target.id;
@@ -32,7 +39,6 @@ class Holidays extends React.Component {
 
   render() {
     const {
-      deleteSingleHoliday,
       passHolidayToEdit,
       onHolidaySelection,
     } = this.props;
@@ -41,7 +47,7 @@ class Holidays extends React.Component {
     <HolidayCard
     key={holiday.id}
     holiday={holiday}
-    deleteSingleHoliday={deleteSingleHoliday}
+    deleteSingleHoliday={this.deleteSingleHoliday}
     onSelect={onHolidaySelection}
     passHolidayToEdit={passHolidayToEdit}
     />
