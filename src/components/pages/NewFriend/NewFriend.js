@@ -50,16 +50,28 @@ class NewFriend extends React.Component {
   }
 
   formSubmit = (e) => {
-    e.preventDefault();
-    const myFriend = { ...this.state.newFriend };
-    myFriend.uid = authRequests.getCurrentUid();
-    myFriend.isAvoiding = this.state.checkValue;
-    this.addFriend(myFriend);
-    this.setState({ newFriend: defaultFriend });
+    if (this.canBeSubmitted()) {
+      e.preventDefault();
+      const myFriend = { ...this.state.newFriend };
+      myFriend.uid = authRequests.getCurrentUid();
+      myFriend.isAvoiding = this.state.checkValue;
+      this.addFriend(myFriend);
+      this.setState({ newFriend: defaultFriend });
+    } else {
+      alert('Please fill in all fields, jackass!');
+    }
   }
 
-  // changeView = (e) => {
-  // }
+  canBeSubmitted() {
+    const { newFriend } = this.state;
+    return (
+      newFriend.name.length > 2
+      && newFriend.address.length > 2
+      && newFriend.phoneNumber.length > 2
+      && newFriend.email.length > 2
+      && newFriend.relationship.length > 2
+    );
+  }
 
   render() {
     const { newFriend } = this.state;
