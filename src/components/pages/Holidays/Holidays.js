@@ -37,6 +37,10 @@ class Holidays extends React.Component {
     this.props.history.push(`/holidays/${holidayId}`);
   }
 
+  newHolidayView = () => {
+    this.props.history.push('/holidays/new');
+  }
+
   render() {
     const {
       passHolidayToEdit,
@@ -55,6 +59,9 @@ class Holidays extends React.Component {
     return (
       <div className="holidays mx-auto">
         <h2>Holidays</h2>
+        <button className="btn btn-success" onClick={this.newHolidayView}>
+          <i className="fas fa-plus">  Add A Holiday</i>
+        </button>
         <div className="row justify-content-center">{holidaysCards}</div>
       </div>
     );
