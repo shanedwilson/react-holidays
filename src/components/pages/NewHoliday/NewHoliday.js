@@ -25,6 +25,17 @@ class NewHoliday extends React.Component {
     this.setState({ newHoliday: tempHoliday });
   }
 
+  canBeSubmitted() {
+    const { newHoliday } = this.state;
+    return (
+      newHoliday.Date.length > 2
+      && newHoliday.name.length > 2
+      && newHoliday.imageUrl.length > 2
+      && newHoliday.location.length > 2
+      && newHoliday.startTime.length > 2
+    );
+  }
+
   nameChange = e => this.formFieldStringState('name', e);
 
   dateChange = e => this.formFieldStringState('Date', e);
@@ -44,11 +55,15 @@ class NewHoliday extends React.Component {
   }
 
   formSubmit = (e) => {
-    e.preventDefault();
-    const myHoliday = { ...this.state.newHoliday };
-    myHoliday.uid = authRequests.getCurrentUid();
-    this.addHoliday(myHoliday);
-    this.setState({ newHoliday: defaultHoliday });
+    if (this.canBeSubmitted()) {
+      e.preventDefault();
+      const myHoliday = { ...this.state.newHoliday };
+      myHoliday.uid = authRequests.getCurrentUid();
+      this.addHoliday(myHoliday);
+      this.setState({ newHoliday: defaultHoliday });
+    } else {
+      alert('Please fill in all fields, jackass!');
+    }
   }
 
   render() {
