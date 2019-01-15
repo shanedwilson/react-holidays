@@ -18,12 +18,12 @@ const defaultFriend = {
 class EditFriend extends React.Component {
   static propTypes = {
     onSubmit: PropTypes.func,
-    editId: PropTypes.string,
   }
 
   state = {
     editedFriend: defaultFriend,
     checkValue: false,
+    editId: '-1',
   }
 
   formFieldStringState = (name, e) => {
@@ -49,7 +49,9 @@ class EditFriend extends React.Component {
   }
 
   addEditedFriend = (editedFriend) => {
-    friendsData.updateFriend(editedFriend)
+    const { editId } = this.state;
+    console.log(editedFriend);
+    friendsData.updateFriend(editedFriend, editId)
       .then(() => {
         this.props.history.push('/friends');
       });
@@ -86,6 +88,7 @@ class EditFriend extends React.Component {
       .then((friendToEdit) => {
         this.setState({ editedFriend: friendToEdit });
         this.setState({ checkValue: friendToEdit.isAvoiding });
+        this.setState({ editId: friendToEdit.id });
       });
   }
 
