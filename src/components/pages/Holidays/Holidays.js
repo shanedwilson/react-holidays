@@ -45,9 +45,10 @@ class Holidays extends React.Component {
     const {
       passHolidayToEdit,
       onHolidaySelection,
+      holidays,
     } = this.props;
 
-    const holidaysCards = this.state.holidays.map(holiday => (
+    const holidaysCards = holidays.map(holiday => (
     <HolidayCard
     key={holiday.id}
     holiday={holiday}

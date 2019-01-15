@@ -50,11 +50,12 @@ class NewFriend extends React.Component {
   }
 
   formSubmit = (e) => {
+    const { checkValue } = this.state;
     if (this.canBeSubmitted()) {
       e.preventDefault();
       const myFriend = { ...this.state.newFriend };
       myFriend.uid = authRequests.getCurrentUid();
-      myFriend.isAvoiding = this.state.checkValue;
+      myFriend.isAvoiding = checkValue;
       this.addFriend(myFriend);
       this.setState({ newFriend: defaultFriend });
     } else {
