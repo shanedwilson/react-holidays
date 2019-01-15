@@ -31,8 +31,7 @@ class Friends extends React.Component {
       });
   }
 
-  changeView = (e) => {
-    const friendId = e.target.id;
+  passFriendToEdit = (friendId) => {
     this.props.history.push(`/friends/${friendId}/edit`);
   }
 
@@ -42,7 +41,6 @@ class Friends extends React.Component {
 
   render() {
     const {
-      passFriendToEdit,
       onFriendSelection,
     } = this.props;
 
@@ -54,7 +52,7 @@ class Friends extends React.Component {
     friend={friend}
     deleteSingleFriend={this.deleteSingleFriend}
     onSelect={onFriendSelection}
-    passFriendToEdit={passFriendToEdit}
+    passFriendToEdit={this.passFriendToEdit}
     />
     ));
 
