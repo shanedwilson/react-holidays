@@ -46,7 +46,9 @@ class Friends extends React.Component {
       onFriendSelection,
     } = this.props;
 
-    const friendsCards = this.state.friends.map(friend => (
+    const { friends } = this.state;
+
+    const friendsCards = friends.map(friend => (
     <FriendCard
     key={friend.id}
     friend={friend}
