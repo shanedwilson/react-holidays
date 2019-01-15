@@ -50,7 +50,6 @@ class EditFriend extends React.Component {
 
   addEditedFriend = (editedFriend) => {
     const { editId } = this.state;
-    console.log(editedFriend);
     friendsData.updateFriend(editedFriend, editId)
       .then(() => {
         this.props.history.push('/friends');
