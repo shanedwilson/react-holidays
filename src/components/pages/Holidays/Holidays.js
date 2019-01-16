@@ -35,8 +35,7 @@ class Holidays extends React.Component {
     this.props.history.push(`/holidays/${holidayId}/edit`);
   }
 
-  holidayDetailsView = (e) => {
-    const holidayId = e.target.id;
+  holidayDetailsView = (holidayId) => {
     this.props.history.push(`/holidays/${holidayId}`);
   }
 
@@ -46,10 +45,6 @@ class Holidays extends React.Component {
 
   render() {
     const {
-      onHolidaySelection,
-    } = this.props;
-
-    const {
       holidays,
     } = this.state;
 
@@ -58,7 +53,7 @@ class Holidays extends React.Component {
     key={holiday.id}
     holiday={holiday}
     deleteSingleHoliday={this.deleteSingleHoliday}
-    onSelect={onHolidaySelection}
+    onSelect={this.holidayDetailsView}
     passHolidayToEdit={this.passHolidayToEdit}
     />
     ));
