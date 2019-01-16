@@ -1,18 +1,22 @@
 {
   "holidayFriend1" : {
     "holidayId": "holiday1",
-    "friendId": "friend2"
+    "friendId": "friend2",
+    "isComing" : true
   },
   "holidayFriend2" : {
     "holidayId": "holiday1",
-    "friendId": "friend3"
+    "friendId": "friend3",
+    "isComing" : false
   }, 
   "holidayFriend3" : {
     "holidayId": "holiday1",
-    "friendId": "friend5"
+    "friendId": "friend5",
+    "isComing" : true
   },
   "holidayFriend4": {
     "holidayId" : "holiday2",
-    "friendId" : "friend2"
+    "friendId" : "friend2",
+    "isComing" : true
   }
 }
