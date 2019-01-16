@@ -1,7 +1,7 @@
 import axios from 'axios';
 import apiKeys from '../apiKeys';
 
-const baseUrl = apiKeys.firebaseKeys.databaseURL;
+const baseUrl = apiKeys.firebaseConfig.databaseURL;
 
 const getFriendIdsForHoliday = holidayId => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/holidayFriends.json?orderBy="holidayId"&equalTo="${holidayId}"`)
