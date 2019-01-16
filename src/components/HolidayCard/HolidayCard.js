@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import holidayShape from '../../helpers/propz/holidayShape';
+import holidayShape from '../../helpers/propz/holidayShape';
 import authRequests from '../../helpers/data/authRequests';
 
 import './HolidayCard.scss';
 
-class FriendCard extends React.Component {
+class HolidayCard extends React.Component {
     static propTypes = {
-      // holiday: holidayShape.holidayShape,
+      holiday: holidayShape.holidayShape,
       deleteSingleHoliday: PropTypes.func,
       passHolidayToEdit: PropTypes.func,
     }
@@ -68,4 +68,4 @@ class FriendCard extends React.Component {
   }
 }
 
-export default FriendCard;
+export default HolidayCard;

@@ -7,15 +7,27 @@ const firebaseUrl = apiKeys.firebaseConfig.databaseURL;
 const getAllHolidays = uid => new Promise((resolve, reject) => {
   axios.get(`${firebaseUrl}/holidays.json?orderBy="uid"&equalTo="${uid}"`)
     .then((results) => {
-      const friendsObject = results.data;
-      const friendsArray = [];
-      if (friendsObject !== null) {
-        Object.keys(friendsObject).forEach((friendId) => {
-          friendsObject[friendId].id = friendId;
-          friendsArray.push(friendsObject[friendId]);
+      const holidaysObject = results.data;
+      const holidaysArray = [];
+      if (holidaysObject !== null) {
+        Object.keys(holidaysObject).forEach((holidayId) => {
+          holidaysObject[holidayId].id = holidayId;
+          holidaysArray.push(holidaysObject[holidayId]);
         });
       }
-      resolve(friendsArray);
+      resolve(holidaysArray);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
+const getSingleHoliday = holidayId => new Promise((resolve, reject) => {
+  axios.get(`${firebaseUrl}/holidays/${holidayId}.json`)
+    .then((result) => {
+      const singleHoliday = result.data;
+      singleHoliday.id = holidayId;
+      resolve(singleHoliday);
     })
     .catch((error) => {
       reject(error);
@@ -26,6 +38,7 @@ const deleteHoliday = holidayId => axios.delete(`${firebaseUrl}/holidays/${holid
 
 const createHoliday = holidayObject => axios.post(`${firebaseUrl}/holidays.json`, JSON.stringify(holidayObject));
 
+const updateHoliday = (holidayObject, holidayId) => axios.put(`${firebaseUrl}/holidays/${holidayId}.json`, JSON.stringify(holidayObject));
 
 // const getHolidaysByArrayOfIds = (uid, holidayIdsArray) => new Promise((resolve, reject) => {
 //   axios.get(`${baseUrl}/holidays.json?orderBy="uid"&equalTo="${uid}"`)
@@ -50,4 +63,6 @@ export default {
   getAllHolidays,
   deleteHoliday,
   createHoliday,
+  getSingleHoliday,
+  updateHoliday,
 };
