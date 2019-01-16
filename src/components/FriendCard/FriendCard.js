@@ -10,6 +10,7 @@ class FriendCard extends React.Component {
       friend: friendShape.friendShape,
       deleteSingleFriend: PropTypes.func,
       passFriendToEdit: PropTypes.func,
+      detaisView: PropTypes.bool,
     }
 
   deleteEvent = (e) => {
@@ -31,11 +32,11 @@ class FriendCard extends React.Component {
   }
 
   render() {
-    const { friend } = this.props;
+    const { friend, detailsView } = this.props;
     const uid = authRequests.getCurrentUid();
 
     const makeButtons = () => {
-      if (friend.uid === uid) {
+      if (friend.uid === uid && !detailsView) {
         return (
         <div>
           <span className="col">
