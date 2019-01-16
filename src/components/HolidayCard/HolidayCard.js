@@ -10,6 +10,7 @@ class HolidayCard extends React.Component {
       holiday: holidayShape.holidayShape,
       deleteSingleHoliday: PropTypes.func,
       passHolidayToEdit: PropTypes.func,
+      onSelect: PropTypes.func,
     }
 
   deleteEvent = (e) => {
@@ -56,13 +57,16 @@ class HolidayCard extends React.Component {
     return (
       <div className="card col-5 mt-3 mr-1">
         <h5 className="card-header">{holiday.name}</h5>
-        <div className="card-body">
+        <div className="card-body" onClick={this.holidayClick}>
           <img className="card-img-top" src={holiday.imageUrl} alt={holiday.name} />
           <p className="card-text">{holiday.Date}</p>
           <p className="card-text">{holiday.location}</p>
           <p className="card-text">{holiday.startTime}</p>
-          {makeButtons()}
         </div>
+        <footer>
+          {makeButtons()}
+        </footer>
+
       </div>
     );
   }
