@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import holidaysData from '../../../helpers/data/holidaysData';
 import authRequests from '../../../helpers/data/authRequests';
 
@@ -15,10 +14,6 @@ const defaultHoliday = {
 };
 
 class EditHoliday extends React.Component {
-  static propTypes = {
-    onSubmit: PropTypes.func,
-  }
-
   state = {
     editedHoliday: defaultHoliday,
     editId: '-1',
@@ -86,9 +81,9 @@ class EditHoliday extends React.Component {
     const { editedHoliday } = this.state;
 
     return (
-      <div className="new-holiday mx-auto">
+      <div className="edit-holiday mx-auto">
         <div className="holiday-form mt-5">
-          <form onSubmit={this.formSubmit}>
+          <form className="holiday-form" onSubmit={ this.formSubmit }>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="name-pre">Name</span>
@@ -159,7 +154,7 @@ class EditHoliday extends React.Component {
                 onChange={this.startTimeChange}
               />
             </div>
-            <button type="button" className="btn btn-success mt-3" onClick={this.formSubmit}>
+            <button type="submit" className="btn btn-success mt-3" onClick={this.formSubmit}>
               <i className="fas fa-plus"></i>
             </button>
           </form>

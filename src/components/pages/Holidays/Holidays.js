@@ -32,7 +32,6 @@ class Holidays extends React.Component {
   }
 
   passHolidayToEdit = (holidayId) => {
-    console.log(holidayId);
     this.props.history.push(`/holidays/${holidayId}/edit`);
   }
 
