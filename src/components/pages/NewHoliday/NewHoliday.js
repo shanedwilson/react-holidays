@@ -72,7 +72,7 @@ class NewHoliday extends React.Component {
     return (
       <div className="new-holiday mx-auto">
         <div className="holiday-form mt-5">
-          <form onSubmit={this.formSubmit}>
+          <form className="holiday-form" onSubmit={this.formSubmit}>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="name-pre">Name</span>
@@ -143,7 +143,7 @@ class NewHoliday extends React.Component {
                 onChange={this.startTimeChange}
               />
             </div>
-            <button type="button" className="btn btn-success mt-3" onClick={this.formSubmit}>
+            <button type="submit" className="btn btn-success mt-3" onClick={this.formSubmit}>
               <i className="fas fa-plus"></i>
             </button>
           </form>

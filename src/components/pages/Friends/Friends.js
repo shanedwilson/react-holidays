@@ -32,7 +32,6 @@ class Friends extends React.Component {
   }
 
   passFriendToEdit = (friendId) => {
-    this.setState({ editId: friendId });
     this.props.history.push(`/friends/${friendId}/edit`);
   }
 

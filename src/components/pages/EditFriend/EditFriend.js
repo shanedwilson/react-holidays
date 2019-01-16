@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import friendsData from '../../../helpers/data/friendsData';
 import authRequests from '../../../helpers/data/authRequests';
 
@@ -16,10 +15,6 @@ const defaultFriend = {
 };
 
 class EditFriend extends React.Component {
-  static propTypes = {
-    onSubmit: PropTypes.func,
-  }
-
   state = {
     editedFriend: defaultFriend,
     checkValue: false,
@@ -175,7 +170,7 @@ class EditFriend extends React.Component {
               <input type="checkbox" className="custom-control-input" id="customCheck1" onChange={ this.checkEvent } checked={checkValue}/>
               <label className="custom-control-label" htmlFor="customCheck1">Am I avoiding this person?</label>
             </div>
-            <button type="button" className="btn btn-success mt-3" onClick={this.formSubmit}>
+            <button type="submit" className="btn btn-success mt-3" onClick={this.formSubmit}>
               <i className="fas fa-plus"></i>
             </button>
           </form>

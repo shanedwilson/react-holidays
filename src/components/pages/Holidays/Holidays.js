@@ -16,7 +16,7 @@ class Holidays extends React.Component {
         this.setState({ holidays });
       })
       .catch((err) => {
-        console.error('error with friends GET', err);
+        console.error('error with holidays GET', err);
       });
   };
 
@@ -31,6 +31,9 @@ class Holidays extends React.Component {
       });
   }
 
+  passHolidayToEdit = (holidayId) => {
+    this.props.history.push(`/holidays/${holidayId}/edit`);
+  }
 
   holidayDetailsView = (e) => {
     const holidayId = e.target.id;
@@ -43,7 +46,6 @@ class Holidays extends React.Component {
 
   render() {
     const {
-      passHolidayToEdit,
       onHolidaySelection,
     } = this.props;
 
@@ -57,7 +59,7 @@ class Holidays extends React.Component {
     holiday={holiday}
     deleteSingleHoliday={this.deleteSingleHoliday}
     onSelect={onHolidaySelection}
-    passHolidayToEdit={passHolidayToEdit}
+    passHolidayToEdit={this.passHolidayToEdit}
     />
     ));
     return (
