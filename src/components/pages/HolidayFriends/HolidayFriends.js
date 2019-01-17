@@ -2,13 +2,15 @@ import React from 'react';
 import authRequests from '../../../helpers/data/authRequests';
 import friendsData from '../../../helpers/data/friendsData';
 import holidaysData from '../../../helpers/data/holidaysData';
-import holidayFriendsData from '../../../helpers/data/holidayFriendsData';
+// import holidayFriendsData from '../../../helpers/data/holidayFriendsData';
+import FriendCard from '../../FriendCard/FriendCard';
 import './HolidayFriends.scss';
 
 class HolidayFriends extends React.Component {
   state = {
     singleHoliday: [],
     friends: [],
+    view: 'attendance',
   }
 
   componentDidMount() {
@@ -34,11 +36,22 @@ class HolidayFriends extends React.Component {
   render() {
     const {
       singleHoliday,
+      friends,
+      view,
     } = this.state;
+
+    const friendNames = friends.map(friend => (
+    <FriendCard
+    key={friend.id}
+    friend={friend}
+    view={view}
+    />
+    ));
 
     return (
       <div className="holiday-friends mx-auto mt-5">
         <h3>Add Friends to {singleHoliday.name}</h3>
+        <div className="row justify-content-center">{friendNames}</div>
       </div>
     );
   }

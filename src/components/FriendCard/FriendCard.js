@@ -11,6 +11,7 @@ class FriendCard extends React.Component {
       deleteSingleFriend: PropTypes.func,
       passFriendToEdit: PropTypes.func,
       detaisView: PropTypes.bool,
+      holidayFriendsView: PropTypes.bool,
     }
 
   deleteEvent = (e) => {
@@ -32,11 +33,11 @@ class FriendCard extends React.Component {
   }
 
   render() {
-    const { friend, detailsView } = this.props;
+    const { friend, view, friendsView } = this.props;
     const uid = authRequests.getCurrentUid();
 
     const makeButtons = () => {
-      if (friend.uid === uid && !detailsView) {
+      if (friend.uid === uid && friendsView === true) {
         return (
         <div>
           <span className="col">
@@ -54,6 +55,21 @@ class FriendCard extends React.Component {
       }
       return <span className="col-2"></span>;
     };
+
+    const makeCheckbox = () => {
+      if (friend.uid === uid && view === 'attendance') {
+        return (
+        <div>
+          <span className="col">
+            <input type="checkbox" className="form-check-input" id="attendingCheck" />
+            <label className="form-check-label" htmlFor="exampleCheck1">Attending</label>
+          </span>
+        </div>
+        );
+      }
+      return <span className="col-2"></span>;
+    };
+
     return (
       <div className="card col-3 mt-3 mr-1">
         <h5 className="card-header">{friend.name}</h5>
@@ -62,7 +78,8 @@ class FriendCard extends React.Component {
           <p className="card-text">{friend.phoneNumber}</p>
           <p className="card-text">{friend.email}</p>
           <p className="card-text">{friend.relationship}</p>
-          {makeButtons()}
+            {makeButtons()}
+            {makeCheckbox()}
         </div>
       </div>
     );

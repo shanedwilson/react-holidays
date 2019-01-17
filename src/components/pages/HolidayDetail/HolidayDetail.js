@@ -11,7 +11,6 @@ class HolidayDetail extends React.Component {
   state = {
     singleHoliday: [],
     friends: [],
-    detailsView: true,
   }
 
   holidayFriendsView = () => {
@@ -28,6 +27,7 @@ class HolidayDetail extends React.Component {
           friendsData.getFriendsByArrayOfIds(uid, friendIds).then((friends) => {
             this.setState({ singleHoliday });
             this.setState({ friends });
+            this.setState({ view: 'detail' });
           });
         });
       })
@@ -40,14 +40,14 @@ class HolidayDetail extends React.Component {
     const {
       singleHoliday,
       friends,
-      detailsView,
+      view,
     } = this.state;
 
     const friendNames = friends.map(friend => (
     <FriendCard
     key={friend.id}
     friend={friend}
-    detailsView={detailsView}
+    view={view}
     />
     ));
 

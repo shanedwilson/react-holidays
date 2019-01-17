@@ -7,6 +7,7 @@ import './Friends.scss';
 class Friends extends React.Component {
   state = {
     friends: [],
+    friendsView: true,
   }
 
   getFriends = () => {
@@ -44,7 +45,7 @@ class Friends extends React.Component {
       onFriendSelection,
     } = this.props;
 
-    const { friends } = this.state;
+    const { friends, friendsView } = this.state;
 
     const friendsCards = friends.map(friend => (
     <FriendCard
@@ -53,6 +54,7 @@ class Friends extends React.Component {
     deleteSingleFriend={this.deleteSingleFriend}
     onSelect={onFriendSelection}
     passFriendToEdit={this.passFriendToEdit}
+    friendsView={friendsView}
     />
     ));
 
