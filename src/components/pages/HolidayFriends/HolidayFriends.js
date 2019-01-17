@@ -16,8 +16,8 @@ class HolidayFriends extends React.Component {
     friends: [],
     holidayFriends: [],
     notHolidayFriends: [],
-    singleHolidayFriend: [],
     newHolidayFriend: defaultHolidayFriend,
+    singleHolidayFriend: [],
   }
 
   holidayFriendsGetter = () => {
@@ -60,11 +60,25 @@ class HolidayFriends extends React.Component {
     holidayFriendsData.createHolidayFriend(myHolidayFriend);
   }
 
-  deleteHolidayFriend = (holidayFriendId) => {
+  deleteHolidayFriend = () => {
+    const friendIdToRemove = this.state.singleHolidayFriend[0].id;
+    holidayFriendsData.deleteHolidayFriend(friendIdToRemove)
+      .then(() => {
+        this.holidayFriendsGetter();
+        this.setState({ singleHolidayFriend: [] });
+      });
+  }
+
+  getFriendToRemove = (holidayFriendId) => {
     holidayFriendsData.getAllHolidayFriends(holidayFriendId)
       .then((singleHolidayFriend) => {
-        holidayFriendsData.deleteHolidayFriend(singleHolidayFriend[0].id);
-        this.holidayFriendsGetter();
+        this.setState({ singleHolidayFriend });
+      })
+      .then(() => {
+        this.deleteHolidayFriend();
+      })
+      .catch((error) => {
+        console.error('error in getting friend to remove', error);
       });
   }
 
@@ -78,7 +92,7 @@ class HolidayFriends extends React.Component {
       this.createHolidayFriend(myHolidayFriend);
       this.holidayFriendsGetter();
     } else {
-      this.deleteHolidayFriend(e.target.id);
+      this.getFriendToRemove(e.target.id);
     }
     this.setState({ newHolidayFriend: defaultHolidayFriend });
   }
