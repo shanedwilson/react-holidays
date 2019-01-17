@@ -35,9 +35,7 @@ class FriendCard extends React.Component {
   render() {
     const {
       friend,
-      view,
       friendsView,
-      holidayFriends,
     } = this.props;
 
     const uid = authRequests.getCurrentUid();
@@ -62,20 +60,6 @@ class FriendCard extends React.Component {
       return <span className="col-2"></span>;
     };
 
-    const makeCheckbox = () => {
-      if (friend.uid === uid && view === 'attendance') {
-        return (
-        <div>
-          <span className="col">
-            <input type="checkbox" className="form-check-input" id="attendingCheck" />
-            <label className="form-check-label" htmlFor="exampleCheck1">Attending</label>
-          </span>
-        </div>
-        );
-      }
-      return <span className="col-2"></span>;
-    };
-
     return (
       <div className="card col-3 mt-3 mr-1">
         <h5 className="card-header">{friend.name}</h5>
@@ -85,7 +69,6 @@ class FriendCard extends React.Component {
           <p className="card-text">{friend.email}</p>
           <p className="card-text">{friend.relationship}</p>
             {makeButtons()}
-            {makeCheckbox()}
         </div>
       </div>
     );

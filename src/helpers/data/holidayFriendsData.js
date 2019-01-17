@@ -20,4 +20,22 @@ const getFriendIdsForHoliday = holidayId => new Promise((resolve, reject) => {
     });
 });
 
-export default { getFriendIdsForHoliday };
+const getAllHolidayFriends = () => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/holidayFriends.json`)
+    .then((results) => {
+      const holidayFriendsObject = results.data;
+      const holidayFriendsArray = [];
+      if (holidayFriendsObject !== null) {
+        Object.keys(holidayFriendsObject).forEach((friendId) => {
+          holidayFriendsObject[friendId].id = friendId;
+          holidayFriendsArray.push(holidayFriendsObject[friendId]);
+        });
+      }
+      resolve(holidayFriendsArray);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
+export default { getFriendIdsForHoliday, getAllHolidayFriends };
