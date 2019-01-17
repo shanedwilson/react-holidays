@@ -33,7 +33,13 @@ class FriendCard extends React.Component {
   }
 
   render() {
-    const { friend, view, friendsView } = this.props;
+    const {
+      friend,
+      view,
+      friendsView,
+      holidayFriends,
+    } = this.props;
+
     const uid = authRequests.getCurrentUid();
 
     const makeButtons = () => {
