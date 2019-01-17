@@ -5,18 +5,36 @@ import holidaysData from '../../../helpers/data/holidaysData';
 import holidayFriendsData from '../../../helpers/data/holidayFriendsData';
 import './HolidayFriends.scss';
 
+const defaultHolidayFriend = {
+  holidayId: '',
+  friendId: '',
+};
+
 class HolidayFriends extends React.Component {
   state = {
     singleHoliday: [],
     friends: [],
     holidayFriends: [],
     notHolidayFriends: [],
-    checked: false,
+    singleHolidayFriend: [],
+    newHolidayFriend: defaultHolidayFriend,
   }
 
-  componentDidMount() {
+  holidayFriendsGetter = () => {
     const firebaseId = this.props.match.params.id;
     const uid = authRequests.getCurrentUid();
+    holidayFriendsData.getFriendIdsForHoliday(firebaseId).then((friendIds) => {
+      friendsData.getFriendsByArrayOfIds(uid, friendIds).then((holidayFriends) => {
+        this.setState({ holidayFriends });
+      });
+    });
+
+    holidayFriendsData.getFriendIdsForHoliday(firebaseId).then((friendIds) => {
+      friendsData.getNotFriendsByArrayOfIds(uid, friendIds).then((notHolidayFriends) => {
+        this.setState({ notHolidayFriends });
+      });
+    });
+
     holidaysData.getSingleHoliday(firebaseId)
       .then((singleHoliday) => {
         this.setState({ singleHoliday });
@@ -32,22 +50,40 @@ class HolidayFriends extends React.Component {
       .catch((error) => {
         console.error('error in getting friends', error);
       });
+  }
 
-    holidayFriendsData.getFriendIdsForHoliday(firebaseId).then((friendIds) => {
-      friendsData.getFriendsByArrayOfIds(uid, friendIds).then((holidayFriends) => {
-        this.setState({ holidayFriends });
-      });
-    });
+  componentDidMount() {
+    this.holidayFriendsGetter();
+  }
 
-    holidayFriendsData.getFriendIdsForHoliday(firebaseId).then((friendIds) => {
-      friendsData.getNotFriendsByArrayOfIds(uid, friendIds).then((notHolidayFriends) => {
-        this.setState({ notHolidayFriends });
+  createHolidayFriend = (myHolidayFriend) => {
+    holidayFriendsData.createHolidayFriend(myHolidayFriend);
+  }
+
+  deleteHolidayFriend = (holidayFriendId) => {
+    holidayFriendsData.getAllHolidayFriends(holidayFriendId)
+      .then((singleHolidayFriend) => {
+        holidayFriendsData.deleteHolidayFriend(singleHolidayFriend[0].id);
+        this.holidayFriendsGetter();
+      })
+      .then(() => {
+        this.setState({ singleHolidayFriend: [] });
       });
-    });
   }
 
   checkEvent = (e) => {
-    this.setState({ checked: e.target.checked });
+    const { singleHoliday } = this.state;
+    // e.preventDefault();
+    const myHolidayFriend = { ...this.state.newHolidayFriend };
+    myHolidayFriend.holidayId = singleHoliday.id;
+    myHolidayFriend.friendId = e.target.id;
+    if (e.target.checked) {
+      this.createHolidayFriend(myHolidayFriend);
+      this.holidayFriendsGetter();
+    } else {
+      this.deleteHolidayFriend(e.target.id);
+    }
+    this.setState({ newHolidayFriend: defaultHolidayFriend });
   }
 
   render() {
@@ -61,7 +97,7 @@ class HolidayFriends extends React.Component {
       <div key={holidayFriend.id} className="card col-4 mt-3 mr-1">
         <h5 className="card-header">{holidayFriend.name}</h5>
         <div className="card-body">
-          <input type="checkbox" checked='true' className="form-check-input" id="attendingCheck" onChange={this.checkEvent} />
+          <input type="checkbox" checked className="form-check-input" id={holidayFriend.id} onChange={this.checkEvent} />
           <label className="form-check-label" htmlFor="exampleCheck1">Attending {singleHoliday.name}?</label>
         </div>
       </div>
@@ -71,7 +107,7 @@ class HolidayFriends extends React.Component {
       <div key={notHolidayFriend.id} className="card col-4 mt-3 mr-1">
         <h5 className="card-header">{notHolidayFriend.name}</h5>
         <div className="card-body">
-          <input type="checkbox" className="form-check-input" id="attendingCheck" onChange={this.checkEvent} />
+          <input type="checkbox" className="form-check-input" id={notHolidayFriend.id} onChange={this.checkEvent} />
           <label className="form-check-label" htmlFor="exampleCheck1">Attending {singleHoliday.name}?</label>
         </div>
       </div>

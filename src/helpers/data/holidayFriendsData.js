@@ -20,7 +20,7 @@ const getFriendIdsForHoliday = holidayId => new Promise((resolve, reject) => {
     });
 });
 
-const getAllHolidayFriends = () => new Promise((resolve, reject) => {
+const getAllHolidayFriends = holidayFriendId => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/holidayFriends.json`)
     .then((results) => {
       const holidayFriendsObject = results.data;
@@ -28,7 +28,9 @@ const getAllHolidayFriends = () => new Promise((resolve, reject) => {
       if (holidayFriendsObject !== null) {
         Object.keys(holidayFriendsObject).forEach((friendId) => {
           holidayFriendsObject[friendId].id = friendId;
-          holidayFriendsArray.push(holidayFriendsObject[friendId]);
+          if (holidayFriendsObject[friendId].friendId === holidayFriendId) {
+            holidayFriendsArray.push(holidayFriendsObject[friendId]);
+          }
         });
       }
       resolve(holidayFriendsArray);
@@ -38,4 +40,13 @@ const getAllHolidayFriends = () => new Promise((resolve, reject) => {
     });
 });
 
-export default { getFriendIdsForHoliday, getAllHolidayFriends };
+const createHolidayFriend = friendObject => axios.post(`${baseUrl}/holidayFriends.json`, JSON.stringify(friendObject));
+
+const deleteHolidayFriend = holidayFriendId => axios.delete(`${baseUrl}/holidayFriends/${holidayFriendId}.json`);
+
+export default {
+  getFriendIdsForHoliday,
+  getAllHolidayFriends,
+  createHolidayFriend,
+  deleteHolidayFriend,
+};
