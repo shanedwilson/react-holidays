@@ -65,15 +65,12 @@ class HolidayFriends extends React.Component {
       .then((singleHolidayFriend) => {
         holidayFriendsData.deleteHolidayFriend(singleHolidayFriend[0].id);
         this.holidayFriendsGetter();
-      })
-      .then(() => {
-        this.setState({ singleHolidayFriend: [] });
       });
   }
 
   checkEvent = (e) => {
     const { singleHoliday } = this.state;
-    // e.preventDefault();
+    e.preventDefault();
     const myHolidayFriend = { ...this.state.newHolidayFriend };
     myHolidayFriend.holidayId = singleHoliday.id;
     myHolidayFriend.friendId = e.target.id;
