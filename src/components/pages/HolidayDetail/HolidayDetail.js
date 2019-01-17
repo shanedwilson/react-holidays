@@ -10,8 +10,7 @@ import './HolidayDetail.scss';
 class HolidayDetail extends React.Component {
   state = {
     singleHoliday: [],
-    friends: [],
-    detailsView: true,
+    holidayFriends: [],
   }
 
   holidayFriendsView = () => {
@@ -25,9 +24,10 @@ class HolidayDetail extends React.Component {
     holidaysData.getSingleHoliday(firebaseId)
       .then((singleHoliday) => {
         holidayFriendsData.getFriendIdsForHoliday(firebaseId).then((friendIds) => {
-          friendsData.getFriendsByArrayOfIds(uid, friendIds).then((friends) => {
+          friendsData.getFriendsByArrayOfIds(uid, friendIds).then((holidayFriends) => {
             this.setState({ singleHoliday });
-            this.setState({ friends });
+            this.setState({ holidayFriends });
+            this.setState({ view: 'detail' });
           });
         });
       })
@@ -39,15 +39,15 @@ class HolidayDetail extends React.Component {
   render() {
     const {
       singleHoliday,
-      friends,
-      detailsView,
+      holidayFriends,
+      view,
     } = this.state;
 
-    const friendNames = friends.map(friend => (
+    const friendNames = holidayFriends.map(friend => (
     <FriendCard
     key={friend.id}
     friend={friend}
-    detailsView={detailsView}
+    view={view}
     />
     ));
 
