@@ -48,7 +48,6 @@ class HolidayDetail extends React.Component {
     key={friend.id}
     friend={friend}
     view={view}
-    holidayFriends={holidayFriends}
     />
     ));
 
